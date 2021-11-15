@@ -31,7 +31,7 @@
                 weight_unit :       $container.find('input[name=unit]'),
                 price :          $container.find('input[name=price]'),
                 insurance :           $container.find('input[name=insurance]'),
-                service :            $container.find('input[name=service]')
+                service :            4.99//$container.find('input[name=service]')
             }
 
         if(!$container.length && !$submit.length) {
@@ -198,7 +198,7 @@
                 height :         fields.height.val() ? parseInt(fields.height.val()) : 0,
                 price :          fields.price.val() ? parseInt(fields.price.val()) : 0,                
                 insurance :      fields.insurance.val() ? parseInt(fields.insurance.val()) : 0,
-                service :        fields.service.val() ? parseInt(fields.service.val()) : 0,
+                service :        fields.service ? parseInt(fields.service) : 0,
             };
         }
 
@@ -219,17 +219,31 @@
                 $sp = parseFloat(($dimensions * 2) / 186),                
                 $dc = parseFloat($dimensions / 349),
                 $cs = parseFloat($price * 0.2),
-                $sf = 4.99;
+                $sf = $service;
+
+                $ic = ($ic < 1.10)?1.10:$ic;
+                $sp = ($sp < 9.99)?9.99:$sp;
+                $dc = ($dc < 7.49)?7.49:$dc;
             
             if(fields.weight_unit.filter(":checked").val() == "kg"){
                 $sw = parseFloat(parseFloat(($weight * 2.205) * 16) * 0.45)
             }else{
                 $sw = parseFloat(($weight * 16) * 0.45)
             }
+            $sw = ($sw < 1)?1:$sw;
 
             var $results_reset = $('#calc-results-rs');
 
-            var $output = '<div class="calc-results">';
+            var $output = '<ul>'+
+                '<li>IC: '+parseFloat($ic).toFixed(2)+'</li>'+
+                '<li>SW: '+parseFloat($sw).toFixed(2)+'</li>'+
+                '<li>SP: '+parseFloat($sp).toFixed(2)+'</li>'+
+                '<li>DC: '+parseFloat($dc).toFixed(2)+'</li>'+
+                '<li>CS: '+parseFloat($cs).toFixed(2)+'</li>'+
+                '<li>SF: '+parseFloat($sf).toFixed(2)+'</li>'+
+                        '</ul>'
+
+           /* var $output = '<div class="calc-results">';
             $output += '<p class="calc-results--title">Estimate Shipping Cost</p>';
 
             $output += '<div class="calc--r calc--r-dosecbd">' +
@@ -268,7 +282,7 @@
                 '<div class="calc-results--wr float-right">'+parseFloat(parseFloat($sp)+parseFloat($dc)+parseFloat($sw)+parseFloat($cs)+parseFloat($ic)+parseFloat($sf)).toFixed(2) +
                 '</div>' +
                 '</div>';
-
+*/
 
             var $height = $container.outerHeight();
             $container.children().hide();
