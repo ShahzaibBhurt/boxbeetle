@@ -25,12 +25,12 @@
                     $container.find('input[name=weight]'), //hidden input
                     $container.find('#weight-sl--vl'), //visible span
                 ],
+                size:          $container.find('select[name=size]'),
                 length :       $container.find('input[name=length]'),                
                 width :       $container.find('input[name=width]'),
                 height :       $container.find('input[name=height]'),                
                 weight_unit :       $container.find('input[name=unit]'),
                 price :          $container.find('input[name=price]'),
-                insurance :           $container.find('input[name=insurance]'),
                 service :            4.99//$container.find('input[name=service]')
             }
 
@@ -68,8 +68,8 @@
             /*Get input value*/
             fields.weight[0].on('keyup', function (event) {
                 var $this = $(this);
-                attributes.value = parseInt($this.val(), 10);
-                var _min = parseInt($this.attr('min'), 10);
+                attributes.value = parseFloat($this.val(), 10);
+                var _min = parseFloat($this.attr('min'), 10);
 
                 if (attributes.value >= _min) {
                     fields.weight[1].text(attributes.value);
@@ -192,27 +192,38 @@
 
             var weight_unit = fields.weight_unit.filter(":checked").val() == "kg" ? 1 : fields.weight_unit.filter(":checked").val() == "lb" ? 2.205 : 0;
             return {
-                weight :         fields.weight[0].val() ? parseInt((fields.weight[0].val()/weight_unit).toFixed()) : 0,
-                length :         fields.length.val() ? parseInt(fields.length.val()) : 0,                
-                width :          fields.width.val() ? parseInt(fields.width.val()) : 0,                
-                height :         fields.height.val() ? parseInt(fields.height.val()) : 0,
-                price :          fields.price.val() ? parseInt(fields.price.val()) : 0,                
-                insurance :      fields.insurance.val() ? parseInt(fields.insurance.val()) : 0,
-                service :        fields.service ? parseInt(fields.service) : 0,
+                weight :         fields.weight[0].val() ? parseFloat((fields.weight[0].val()/weight_unit).toFixed()) : 0,
+                size :           fields.size.val() ? fields.size.val() : 'in',                
+                length :         fields.length.val() ? parseFloat(fields.length.val()) : 0,                
+                width :          fields.width.val() ? parseFloat(fields.width.val()) : 0,                
+                height :         fields.height.val() ? parseFloat(fields.height.val()) : 0,
+                price :          fields.price.val() ? parseFloat(fields.price.val()) : 0, 
+                service :        fields.service ? parseFloat(fields.service) : 0,
             };
         }
 
         function CalculateResults (results) {
             
-            var $length = results.length,
+            var $size = results.size,
+                $length = results.length,
                 $width = results.width,
                 $height = results.height,
                 $weight = results.weight,
                 $price = results.price,
-                $insurance = results.insurance,
                 $service = results.service;
             
-            var $dimensions = parseFloat($length * $width * $height);
+            var $dimensions = 0;
+            
+            if($size === 'in'){
+                $dimensions = parseFloat($length * $width * $height)
+            }else if($size === 'ft'){
+                $dimensions = parseFloat(($length*12) * ($width*12) * ($height*12)).toFixed(2)
+                console.log("if dm: "+$dimensions)
+            }else if($size === 'cm'){
+                alert($length)
+                $dimensions = parseFloat(($length/2.54) * ($width/2.54) * ($height/2.54)).toFixed(2)
+                console.log("else dm: "+$dimensions)
+            }
             
             var $ic = parseFloat($dimensions / 0861),
                 $sw = 0,
@@ -226,24 +237,24 @@
                 $dc = ($dc < 7.49)?7.49:$dc;
             
             if(fields.weight_unit.filter(":checked").val() == "kg"){
-                $sw = parseFloat(parseFloat(($weight * 2.205) * 16) * 0.45)
+                $sw = parseFloat(parseFloat(($weight * 2.205) * 16) * 0.19)
             }else{
-                $sw = parseFloat(($weight * 16) * 0.45)
+                $sw = parseFloat(($weight * 16) * 0.19)
             }
             $sw = ($sw < 1)?1:$sw;
 
             var $results_reset = $('#calc-results-rs');
 
-            var $output = '<ul>'+
+            /*var $output = '<ul>'+
                 '<li>IC: '+parseFloat($ic).toFixed(2)+'</li>'+
                 '<li>SW: '+parseFloat($sw).toFixed(2)+'</li>'+
                 '<li>SP: '+parseFloat($sp).toFixed(2)+'</li>'+
                 '<li>DC: '+parseFloat($dc).toFixed(2)+'</li>'+
                 '<li>CS: '+parseFloat($cs).toFixed(2)+'</li>'+
                 '<li>SF: '+parseFloat($sf).toFixed(2)+'</li>'+
-                        '</ul>'
+                        '</ul>'*/
 
-           /* var $output = '<div class="calc-results">';
+            var $output = '<div class="calc-results">';
             $output += '<p class="calc-results--title">Estimate Shipping Cost</p>';
 
             $output += '<div class="calc--r calc--r-dosecbd">' +
@@ -282,7 +293,10 @@
                 '<div class="calc-results--wr float-right">'+parseFloat(parseFloat($sp)+parseFloat($dc)+parseFloat($sw)+parseFloat($cs)+parseFloat($ic)+parseFloat($sf)).toFixed(2) +
                 '</div>' +
                 '</div>';
-*/
+                $output += '<div class="b-reset">' +
+                '                <span class="reset-icon"></span><input type="reset" id="calc-results-rs" name="reset" value="Calculate Again">' +
+                '            </div>';
+            $output += '</div>';
 
             var $height = $container.outerHeight();
             $container.children().hide();
