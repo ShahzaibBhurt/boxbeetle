@@ -218,11 +218,8 @@
                 $dimensions = parseFloat($length * $width * $height)
             }else if($size === 'ft'){
                 $dimensions = parseFloat(($length*12) * ($width*12) * ($height*12)).toFixed(2)
-                console.log("if dm: "+$dimensions)
             }else if($size === 'cm'){
-                alert($length)
                 $dimensions = parseFloat(($length/2.54) * ($width/2.54) * ($height/2.54)).toFixed(2)
-                console.log("else dm: "+$dimensions)
             }
             
             var $ic = parseFloat($dimensions / 0861),
