@@ -19,13 +19,12 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- fevicon ->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />-->
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -76,9 +75,10 @@
                                                 <li class="active"> <a href="index.html">Home</a> </li>
                                                 <li> <a href="#about">About</a> </li>
                                                 <li><a href="#product">Products</a></li>
-                                                <li><a href="#testimonial">Calculator</a></li>
+                                                <li><a href="#calculator">Calculator</a></li>
                                                 <li><a href="#contact">Contact Us</a></li>
                                                 <li><a href="#contact">Schedule a pickup</a></li>
+                                                <li><a href="login.html">Login</a></li>
 
                                             </ul>
                                         </nav>
@@ -176,7 +176,7 @@
                         <a href="#">Read More</a>
                     </div>
                 </div>
-                <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2">
+                <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2 d-md-block d-none">
                     <div class="about_img">
                         <figure><img src="images/pngkey.com-shipping-png-2433874.png" alt="img" /></figure>
                     </div>
@@ -330,22 +330,35 @@
                 <div class="calc" id="calculator">
                     <div class="calc--r">
                         <p class="margin">Please enter the dimensions of the package expected</p>
-                        <div class="calc--lb">
-                            <span class="lb-icon lb-icon-dimensions"></span>Dimensions
-                            <span class="ask-tooltip"></span>
-                            <span class="lb-tooltip">length - width - height</span>
-                        </div>
-                        <div class="input-wr">
-                            <input type="number" name="length" value="" class="custom-input" tabindex="1">
-                            <span>L</span>
-                        </div>
-                        <div class="input-wr">
-                            <input type="number" name="width" value="" class="custom-input" tabindex="2">
-                            <span>W</span>
-                        </div>
-                        <div class="input-wr">
-                            <input type="number" name="height" value="" class="custom-input" tabindex="3">
-                            <span>H</span>
+                        <div class="row" style="width: -webkit-fill-available;">
+                            <div class="col-sm-4 col-4">
+                                <div class="calc--lb">
+                                    <span class="lb-icon lb-icon-dimensions"></span>Dimensions
+                                    <span class="ask-tooltip"></span>
+                                    <span class="lb-tooltip">length - width - height</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-8" style="display: contents;">
+                                <div class="select-wr">
+                                    <select style="display: contents;" name="size" id="size">
+                                        <option value="in" selected>IN</option>
+                                        <option value="ft">FT</option>
+                                        <option value="cm">CM</option>
+                                    </select>
+                                </div>
+                                <div class="input-wr">
+                                    <input type="number" name="length" value="" class="custom-input" tabindex="1">
+                                    <span>L</span>
+                                </div>
+                                <div class="input-wr">
+                                    <input type="number" name="width" value="" class="custom-input" tabindex="2">
+                                    <span>W</span>
+                                </div>
+                                <div class="input-wr">
+                                    <input type="number" name="height" value="" class="custom-input" tabindex="3">
+                                    <span>H</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="calc--r calc--r-weight">
@@ -375,16 +388,9 @@
                         </div>
                     </div>
                     <div class="calc--r">
-                        <div class="calc--lb"><span class="lb-icon lb-icon-insurance"></span>Mandatory Insurance amount</div>
-                        <div class="input-wr">
-                            <input type="number" name="insurance" value="" class="custom-input" tabindex="6">
-                            <span>$</span>
-                        </div>
-                    </div>
-                    <div class="calc--r">
                         <div class="calc--lb"><span class="lb-icon lb-icon-service"></span>Mandatory Service Fee</div>
                         <div class="input-wr">
-                            <input type="number" name="service" value="" class="custom-input" tabindex="6">
+                            <input type="number" name="service" value="4.99" disabled class="custom-input" tabindex="6">
                             <span>$</span>
                         </div>
                     </div>
@@ -565,86 +571,20 @@
 
     <!-- footer -->
     <!--  footer -->
-    <footr>
-        <div class="footer top_layer ">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
-                        <div class="address">
-                            <a href="index.html"> <img src="images/logo.png" alt="logo" /></a>
-                            <p>dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et sdolor sit amet, consectetur adipiscing elit, </p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="address">
-                            <h3>Quick links</h3>
-                            <ul class="Links_footer">
-                                <li><img src="icon/3.png" alt="#" /> <a href="#"> Join Us</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">Maintenance</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">Language Packs</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">LearnPress</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">Release Status</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                        <div class="address">
-                            <h3>Contact Us</h3>
-
-                            <ul class="loca">
-                                <li>
-                                    <a href="#"><img src="icon/loc.png" alt="#" /></a>London 145
-                                    <br>United Kingdom </li>
-                                <li>
-                                    <a href="#"><img src="icon/email.png" alt="#" /></a>demo@gmail.com </li>
-                                <li>
-                                    <a href="#"><img src="icon/call.png" alt="#" /></a>+12586954775 </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-     
-        <div class="copyright">
-            <div class="container">
-                <p>Copyright 2021 BoxBeetle International Couriers and Technology Solutions</p>
-           
-        </div>
-        </div>
-    </footr>
+    <footer></footer>
 
     <!-- end footer -->
     <!-- Javascript files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/plugin.js"></script>
     <!-- sidebar -->
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>
     <!-- javascript -->
-    <script src="js/owl.carousel.js"></script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="js/footer.js"></script>
     <script src="js/calculator.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
-            });
-
-            $(".zoom").hover(function() {
-
-                $(this).addClass('transition');
-            }, function() {
-
-                $(this).removeClass('transition');
-            });
-        });
-    </script>
 </body>
 
 </html>
