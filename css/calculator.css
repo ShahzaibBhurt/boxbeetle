@@ -148,7 +148,7 @@ text-decoration: none;
     visibility: visible;
 }
 #calculator .calc--r .input-wr, #calculator .calc--r .select-wr select, #calculator .calc--r input {
-    font-size: 18px;
+    font-size: 15px;
     color: #656565;
     font-weight: 500;
 }
@@ -724,7 +724,7 @@ text-decoration: none;
         max-width: 50px;
     }
     #calculator .custom-input {
-        max-width: 80px;
+        max-width: 65px;
     }
     #calculator label.first .lb-tooltip {
         left: 0;
@@ -778,6 +778,11 @@ text-decoration: none;
     .calc-wr .cta-modal .close-btn {
         top: 1.5rem;
         right: 1.5rem;
+    }
+}
+@media (max-width: 525px){
+    #calculator .calc--r .row .col-sm-8{
+        display: block !important;
     }
 }
 .margin{
